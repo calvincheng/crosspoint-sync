@@ -72,7 +72,7 @@ function BackBar({ back, label }) {
             history.back()
           }
         }}
-        className="native-hide -ml-2 flex h-11 items-center gap-1.5 rounded-full pr-4 pl-2 text-lg font-semibold text-brand-600 transition active:bg-stone-200/70 md:hover:bg-stone-100"
+        className="native-hide -ml-2 flex h-11 items-center gap-1.5 rounded-full pr-4 pl-2 text-lg font-semibold text-brand-600 transition active:bg-stone-200/70 can-hover:bg-stone-100"
       >
         <ArrowLeft className="size-6" strokeWidth={2} /> {label}
       </a>
@@ -134,7 +134,7 @@ function Cover({ cat, entry, className = '' }) {
 function Tile({ cat, entry, onOpen }) {
   return (
     <button onClick={() => onOpen(entry)} className="group block w-full min-w-0 text-left">
-      <Cover cat={cat} entry={entry} className="w-full transition group-active:scale-[0.98] md:group-hover:-translate-y-0.5 md:group-hover:shadow-md" />
+      <Cover cat={cat} entry={entry} className="w-full transition group-active:scale-[0.98] group-can-hover:-translate-y-0.5 group-can-hover:shadow-md" />
       <p className="mt-2 line-clamp-2 text-sm/5 font-semibold text-stone-900">{entry.title}</p>
       <p className="truncate text-xs text-stone-500">{entry.authors.map(person).join(', ')}</p>
     </button>
@@ -160,7 +160,7 @@ function Rail({ title, more, children }) {
       <div className="flex items-baseline justify-between gap-4">
         <h3 className="min-w-0 truncate font-display text-xl font-semibold text-stone-900">{title}</h3>
         {more && (
-          <a href={more} className="shrink-0 text-sm font-semibold text-brand-600">
+          <a href={more} className="shrink-0 text-sm font-semibold text-brand-600 can-hover:underline can-hover:underline-offset-2">
             See all
           </a>
         )}
@@ -313,7 +313,7 @@ function BookPage({ cat, entryKey }) {
                     <button
                       key={f.href}
                       onClick={() => setFormat(f)}
-                      className={`rounded-full px-3 py-1.5 text-xs font-semibold ${f.href === chosen?.href ? 'bg-brand-500 text-white' : 'bg-surface text-stone-600 ring-1 ring-stone-950/10'}`}
+                      className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${f.href === chosen?.href ? 'bg-brand-500 text-white' : 'bg-surface text-stone-600 ring-1 ring-stone-950/10 can-hover:bg-stone-100'}`}
                     >
                       {f.label}
                     </button>
@@ -325,14 +325,14 @@ function BookPage({ cat, entryKey }) {
                 <button
                   disabled={job?.state === 'working'}
                   onClick={() => run(true)}
-                  className="flex h-14 min-w-0 items-center justify-center gap-2 rounded-2xl bg-brand-500 px-4 text-base font-semibold whitespace-nowrap text-white shadow-sm active:scale-[0.98] disabled:opacity-60"
+                  className="flex h-14 min-w-0 items-center justify-center gap-2 rounded-2xl bg-brand-500 px-4 text-base font-semibold whitespace-nowrap text-white shadow-sm transition active:scale-[0.98] disabled:opacity-60 can-hover:enabled:bg-brand-600"
                 >
                   {job?.state === 'working' ? <Loader2 className="size-5 animate-spin" /> : <SendIcon className="size-5" />} Send to CrossPoint
                 </button>
                 <button
                   disabled={job?.state === 'working'}
                   onClick={() => run(false)}
-                  className="flex h-14 min-w-0 items-center justify-center gap-2 rounded-2xl bg-surface px-4 text-base font-semibold whitespace-nowrap text-stone-700 ring-1 ring-stone-950/10 active:bg-stone-100 disabled:opacity-60"
+                  className="flex h-14 min-w-0 items-center justify-center gap-2 rounded-2xl bg-surface px-4 text-base font-semibold whitespace-nowrap text-stone-700 ring-1 ring-stone-950/10 transition active:bg-stone-100 disabled:opacity-60 can-hover:enabled:bg-stone-100"
                 >
                   <Download className="size-5" /> Download
                 </button>
@@ -397,7 +397,7 @@ function BookPage({ cat, entryKey }) {
               <h2 className="font-display text-xl font-semibold text-stone-900">More like this</h2>
               <Card className="mt-3 divide-y divide-stone-100">
                 {related.map((l) => (
-                  <a key={l.href} href={href(cat, 'f', l.href)} className="flex min-h-12 items-center gap-3 px-4 py-2.5 active:bg-stone-50">
+                  <a key={l.href} href={href(cat, 'f', l.href)} className="flex min-h-12 items-center gap-3 px-4 py-2.5 transition active:bg-stone-50 can-hover:bg-stone-50">
                     <span className="min-w-0 flex-1 text-sm font-medium text-stone-800">{l.title.replace(/…$/, '')}</span>
                     <ChevronRight className="size-4 text-stone-300" />
                   </a>
@@ -487,7 +487,7 @@ function CatalogBlock({ cat }) {
 
   return (
     <section className="mt-10 first:mt-6">
-      <a href={href(cat)} className="inline-flex items-center gap-2">
+      <a href={href(cat)} className="inline-flex items-center gap-2 transition can-hover:opacity-80">
         <h2 className="font-display text-2xl font-semibold tracking-tight text-stone-900">{cat.name}</h2>
         <ChevronRight className="size-5 text-stone-400" />
       </a>
@@ -578,7 +578,7 @@ function SearchAll({ catalogs, query }) {
       )}
       <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
         {catalogs.filter((cat) => results[cat.id]?.next).map((cat) => (
-          <a key={cat.id} href={href(cat, 's', query)} className="flex min-h-11 items-center text-sm font-semibold text-brand-600">
+          <a key={cat.id} href={href(cat, 's', query)} className="flex min-h-11 items-center text-sm font-semibold text-brand-600 transition can-hover:text-brand-700">
             More results from {cat.name}
           </a>
         ))}
@@ -642,7 +642,7 @@ function FeedView({ cat, url, query }) {
                 <a
                   key={f.href}
                   href={href(cat, 'f', f.href)}
-                  className={`shrink-0 rounded-full px-3 py-1.5 text-sm font-medium ${f.active ? 'bg-brand-500 text-white' : 'bg-surface text-stone-600 ring-1 ring-stone-950/10'}`}
+                  className={`shrink-0 rounded-full px-3 py-1.5 text-sm font-medium transition ${f.active ? 'bg-brand-500 text-white' : 'bg-surface text-stone-600 ring-1 ring-stone-950/10 can-hover:bg-stone-100'}`}
                 >
                   {f.title}
                   {f.count != null && <span className="ml-1 font-mono text-xs opacity-70">{f.count}</span>}
@@ -654,7 +654,7 @@ function FeedView({ cat, url, query }) {
           {rows.length > 0 && (
             <Card className="mt-5 divide-y divide-stone-100">
               {rows.map((l, i) => (
-                <a key={`${l.href}-${i}`} href={href(cat, 'f', l.href)} className="flex min-h-14 items-center gap-3 px-4 py-3 active:bg-stone-50">
+                <a key={`${l.href}-${i}`} href={href(cat, 'f', l.href)} className="flex min-h-14 items-center gap-3 px-4 py-3 transition active:bg-stone-50 can-hover:bg-stone-50">
                   <BookOpen className="size-5 shrink-0 text-stone-400" strokeWidth={1.75} />
                   <span className="min-w-0 flex-1 text-[0.95rem] font-medium text-stone-900">{l.title ?? l.href}</span>
                   <ChevronRight className="size-5 text-stone-300" />
@@ -683,7 +683,7 @@ function FeedView({ cat, url, query }) {
             <button
               onClick={loadMore}
               disabled={more}
-              className="mx-auto mt-6 flex h-12 items-center gap-2 rounded-full bg-surface px-6 text-sm font-semibold text-stone-700 ring-1 ring-stone-950/10 active:bg-stone-100"
+              className="mx-auto mt-6 flex h-12 items-center gap-2 rounded-full bg-surface px-6 text-sm font-semibold text-stone-700 ring-1 ring-stone-950/10 transition active:bg-stone-100 can-hover:enabled:bg-stone-100"
             >
               {more ? <Loader2 className="size-4 animate-spin" /> : 'Load more'}
             </button>
@@ -728,7 +728,7 @@ function CatalogForm({ initial, onSave, onCancel }) {
             type="button"
             key={kind}
             onClick={() => setC({ ...c, auth: { kind } })}
-            className={`h-10 rounded-xl text-sm font-semibold ${c.auth.kind === kind ? 'bg-raised text-stone-900 shadow-sm' : 'text-stone-500'}`}
+            className={`h-10 rounded-xl text-sm font-semibold transition ${c.auth.kind === kind ? 'bg-raised text-stone-900 shadow-sm' : 'text-stone-500 can-hover:bg-stone-200/70'}`}
           >
             {label}
           </button>
@@ -743,10 +743,10 @@ function CatalogForm({ initial, onSave, onCancel }) {
       {c.auth.kind === 'bearer' && <input className={input} placeholder="Token" value={c.auth.token ?? ''} onChange={(e) => auth({ token: e.target.value })} autoCapitalize="none" autoCorrect="off" />}
       {error && <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p>}
       <div className="flex gap-2">
-        <button disabled={busy} className="flex h-12 flex-1 items-center justify-center rounded-2xl bg-brand-500 font-semibold text-white disabled:opacity-60">
+        <button disabled={busy} className="flex h-12 flex-1 items-center justify-center rounded-2xl bg-brand-500 font-semibold text-white transition disabled:opacity-60 can-hover:enabled:bg-brand-600">
           {busy ? <Loader2 className="size-5 animate-spin" /> : 'Check and save'}
         </button>
-        <button type="button" onClick={onCancel} className="h-12 rounded-2xl px-5 font-semibold text-stone-600 active:bg-stone-200">
+        <button type="button" onClick={onCancel} className="h-12 rounded-2xl px-5 font-semibold text-stone-600 transition active:bg-stone-200 can-hover:bg-stone-200">
           Cancel
         </button>
       </div>
@@ -869,7 +869,7 @@ function Manage({ catalogs, setCatalogs }) {
                   <GripVertical className="size-5" />
                 </button>
               )}
-              <a href={href(c)} className="flex min-w-0 flex-1 items-center gap-3 py-2">
+              <a href={href(c)} className="flex min-w-0 flex-1 items-center gap-3 py-2 transition can-hover:opacity-80">
                 <div className="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600">
                   <Server className="size-5" />
                 </div>
@@ -878,12 +878,12 @@ function Manage({ catalogs, setCatalogs }) {
                   <p className="truncate font-mono text-xs text-stone-500">{new URL(c.url).host}</p>
                 </div>
               </a>
-              <button onClick={() => setEditing(c)} className="grid size-10 place-items-center rounded-full text-stone-400 active:bg-stone-100" aria-label={`Edit ${c.name}`}>
+              <button onClick={() => setEditing(c)} className="grid size-10 place-items-center rounded-full text-stone-400 transition active:bg-stone-100 can-hover:bg-stone-100" aria-label={`Edit ${c.name}`}>
                 <Pencil className="size-4" />
               </button>
               <button
                 onClick={() => setRemoving(c)}
-                className="grid size-10 place-items-center rounded-full text-stone-400 active:bg-stone-100"
+                className="grid size-10 place-items-center rounded-full text-stone-400 transition active:bg-stone-100 can-hover:bg-stone-100"
                 aria-label={`Remove ${c.name}`}
               >
                 <Trash2 className="size-4" />
@@ -901,7 +901,7 @@ function Manage({ catalogs, setCatalogs }) {
       ) : (
         <button
           onClick={() => setEditing('new')}
-          className="mt-3 flex h-14 w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-stone-300 font-semibold text-stone-600 active:bg-stone-100 md:max-w-xs"
+          className="mt-3 flex h-14 w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-stone-300 font-semibold text-stone-600 transition active:bg-stone-100 can-hover:bg-stone-100 md:max-w-xs"
         >
           <Plus className="size-5" /> Add catalog
         </button>
@@ -915,11 +915,11 @@ function Manage({ catalogs, setCatalogs }) {
                 setCatalogs(catalogs.filter((c) => c.id !== removing.id))
                 setRemoving(null)
               }}
-              className="h-12 rounded-xl bg-red-600 text-base font-semibold text-white active:bg-red-700"
+              className="h-12 rounded-xl bg-red-600 text-base font-semibold text-white transition active:bg-red-700 can-hover:bg-red-700"
             >
               Remove
             </button>
-            <button onClick={() => setRemoving(null)} className="h-12 rounded-xl bg-surface text-base font-semibold text-stone-700 ring-1 ring-stone-950/10 active:bg-stone-100">
+            <button onClick={() => setRemoving(null)} className="h-12 rounded-xl bg-surface text-base font-semibold text-stone-700 ring-1 ring-stone-950/10 transition active:bg-stone-100 can-hover:bg-stone-100">
               Cancel
             </button>
           </div>
