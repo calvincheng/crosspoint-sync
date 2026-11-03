@@ -424,7 +424,7 @@ function ReadingCalendar({ byDay, view, days = [], books = [] }) {
     })
   }
   const { box, handlers, bubble } = useCellTip()
-  const arrow = 'grid size-9 place-items-center rounded-full text-stone-600 active:bg-stone-100 md:hover:bg-stone-100 disabled:opacity-30'
+  const arrow = 'grid size-9 place-items-center rounded-full text-stone-600 transition active:bg-stone-100 can-hover:enabled:bg-stone-100 disabled:opacity-30'
   return (
     <Card className="mt-4 p-4">
       {sharing && (
@@ -447,7 +447,7 @@ function ReadingCalendar({ byDay, view, days = [], books = [] }) {
           type="button"
           onClick={() => setSharing(true)}
           aria-label="Share your reading days"
-          className="-my-2 -mr-2 grid size-10 place-items-center rounded-full text-brand-600 active:bg-stone-100 sm:order-last md:hover:bg-stone-100"
+          className="-my-2 -mr-2 grid size-10 place-items-center rounded-full text-brand-600 transition active:bg-stone-100 can-hover:bg-stone-100 sm:order-last"
         >
           <ShareIcon className="size-5" strokeWidth={1.75} />
         </button>
@@ -458,7 +458,7 @@ function ReadingCalendar({ byDay, view, days = [], books = [] }) {
               type="button"
               onClick={() => pick(v)}
               className={`h-8 rounded-lg px-3 text-xs font-semibold whitespace-nowrap transition ${
-                scale === v ? 'bg-raised text-stone-900 shadow-sm' : 'text-stone-500 active:bg-stone-200'
+                scale === v ? 'bg-raised text-stone-900 shadow-sm' : 'text-stone-500 active:bg-stone-200 can-hover:bg-stone-200/70'
               }`}
             >
               {l}
@@ -538,7 +538,7 @@ function Finished({ list, titles }) {
     <Card className="mt-4 divide-y divide-stone-100 px-4">
       <h2 className="py-3 font-display text-lg font-semibold text-stone-900">Finished</h2>
       {list.slice(0, shown).map((b) => (
-        <a key={b.document} href={`#/book/${b.document}`} className="flex items-baseline justify-between gap-3 py-2.5">
+        <a key={b.document} href={`#/book/${b.document}`} className="flex items-baseline justify-between gap-3 py-2.5 transition can-hover:bg-stone-50">
           <span className="truncate text-sm font-medium text-stone-800">{titles.get(b.document) ?? b.document}</span>
           <span className="shrink-0 font-mono text-xs text-stone-500">
             {b.finished_at ? new Date(b.finished_at * 1000).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : 'Date unknown'}
@@ -549,7 +549,7 @@ function Finished({ list, titles }) {
         <button
           type="button"
           onClick={() => setShown(shown + FINISHED_PER_PAGE)}
-          className="w-full py-3 text-sm font-semibold text-brand-600"
+          className="w-full py-3 text-sm font-semibold text-brand-600 can-hover:underline can-hover:underline-offset-2"
         >
           Show more ({list.length - shown})
         </button>
@@ -682,7 +682,7 @@ function StatsShare({ summary, activity, books, onClose }) {
             role="radio"
             aria-checked={period === v}
             onClick={() => setPeriod(v)}
-            className={`h-9 rounded-lg text-sm font-semibold transition ${period === v ? 'bg-raised text-stone-900 shadow-sm' : 'text-stone-500 active:bg-stone-200'}`}
+            className={`h-9 rounded-lg text-sm font-semibold transition ${period === v ? 'bg-raised text-stone-900 shadow-sm' : 'text-stone-500 active:bg-stone-200 can-hover:bg-stone-200/70'}`}
           >
             {label}
           </button>
@@ -706,7 +706,7 @@ function StatsTabs({ tab }) {
           href={id ? `#/stats/${id}` : '#/stats'}
           aria-current={tab === id ? 'page' : undefined}
           className={`-mb-px border-b-2 pb-2.5 text-sm font-semibold transition ${
-            tab === id ? 'border-brand-500 text-stone-900' : 'border-transparent text-stone-500 hover:text-stone-800'
+            tab === id ? 'border-brand-500 text-stone-900' : 'border-transparent text-stone-500 can-hover:text-stone-800'
           }`}
         >
           {label}
@@ -773,7 +773,7 @@ function Timeline({ session, activity, books }) {
             {reading.length} reading
           </h2>
           {reading.map((b) => (
-            <a key={b.document} href={`#/book/${b.document}`} className="flex items-center gap-4 py-3">
+            <a key={b.document} href={`#/book/${b.document}`} className="flex items-center gap-4 py-3 transition can-hover:bg-stone-50">
               <Cover session={session} book={b} tiny className="w-14" />
               <div className="min-w-0 flex-1">
                 <p className="truncate font-display text-base font-semibold text-stone-900">{b.title || b.filename}</p>
@@ -815,7 +815,7 @@ function Timeline({ session, activity, books }) {
                     const b = byDoc.get(entry.document)
                     const ev = dayEvent(entry, acts.get(entry.document), d.day)
                     return (
-                      <a key={entry.document} href={`#/book/${entry.document}`} className="flex items-center gap-3 rounded-xl bg-surface p-3 ring-1 ring-stone-950/5 transition active:scale-[0.99] md:hover:bg-stone-50">
+                      <a key={entry.document} href={`#/book/${entry.document}`} className="flex items-center gap-3 rounded-xl bg-surface p-3 ring-1 ring-stone-950/5 transition active:scale-[0.99] can-hover:bg-stone-50">
                         <Cover session={session} book={b} tiny className="w-11" />
                         <div className="min-w-0 flex-1">
                           <p className="truncate text-sm font-semibold text-stone-900">{b.title || b.filename}</p>
@@ -838,7 +838,7 @@ function Timeline({ session, activity, books }) {
         <button
           type="button"
           onClick={() => setShown(shown + DAYS_PER_PAGE)}
-          className="mx-auto mb-4 flex h-11 w-full max-w-xs items-center justify-center rounded-xl bg-surface px-6 text-sm font-semibold text-stone-800 ring-1 ring-stone-950/10 active:bg-stone-50 md:hover:bg-stone-50"
+          className="mx-auto mb-4 flex h-11 w-full max-w-xs items-center justify-center rounded-xl bg-surface px-6 text-sm font-semibold text-stone-800 ring-1 ring-stone-950/10 transition active:bg-stone-50 can-hover:bg-stone-50"
         >
           Show earlier days
         </button>
@@ -864,7 +864,7 @@ export default function Stats({ session, tab = '', summary, activity, books, act
               : 'Showing saved activity.'
             : 'Reading activity is unavailable.'}</p>
           <button type="button" onClick={onRetryActivity} disabled={activityLoading}
-            className="min-h-11 shrink-0 rounded-md px-2 font-semibold text-brand-600 disabled:opacity-50">
+            className="min-h-11 shrink-0 rounded-md px-2 font-semibold text-brand-600 transition disabled:opacity-50 can-hover:underline can-hover:underline-offset-2">
             {activityLoading ? 'Retrying…' : 'Retry'}
           </button>
         </div>
@@ -892,7 +892,7 @@ export default function Stats({ session, tab = '', summary, activity, books, act
             type="button"
             onClick={() => setSharing(true)}
             aria-label="Share your stats"
-            className="-my-2 -mr-2 grid size-10 place-items-center rounded-full text-brand-600 active:bg-stone-100 md:hover:bg-stone-100"
+            className="-my-2 -mr-2 grid size-10 place-items-center rounded-full text-brand-600 transition active:bg-stone-100 can-hover:bg-stone-100"
           >
             <ShareIcon className="size-5" strokeWidth={1.75} />
           </button>
