@@ -58,13 +58,13 @@ function Device({ prefs, setPrefs, device, onRetry }) {
           </p>
           {state === 'error' && error && <p className="mt-1 font-mono text-[0.7rem] break-all text-stone-400">{error}</p>}
         </div>
-        <button onClick={onRetry} className="grid size-10 place-items-center rounded-full text-stone-500 active:bg-stone-100" aria-label="Retry">
+        <button onClick={onRetry} className="grid size-10 place-items-center rounded-full text-stone-500 transition active:bg-stone-100 can-hover:bg-stone-100" aria-label="Retry">
           <RefreshCw className="size-5" />
         </button>
       </div>
 
       <details className="mt-3 border-t border-stone-200">
-        <summary className="cursor-pointer py-3 text-sm font-medium text-stone-600">Transfer settings · {folderLabel(prefs.folder)}</summary>
+        <summary className="cursor-pointer py-3 text-sm font-medium text-stone-600 transition can-hover:text-stone-800">Transfer settings · {folderLabel(prefs.folder)}</summary>
         <div className="mt-2 grid gap-3 sm:grid-cols-2">
           <label className="block text-xs font-medium text-stone-500">
             Save to folder
@@ -105,12 +105,12 @@ function Device({ prefs, setPrefs, device, onRetry }) {
                   spellCheck={false}
                   className="h-11 min-w-0 flex-1 rounded-xl bg-surface px-3 text-sm text-stone-900 ring-1 ring-stone-950/10 outline-none focus:ring-2 focus:ring-brand-500/60"
                 />
-                <button className="h-11 rounded-xl bg-brand-500 px-4 text-sm font-semibold text-white">Save</button>
+                <button className="h-11 rounded-xl bg-brand-500 px-4 text-sm font-semibold text-white transition can-hover:bg-brand-600">Save</button>
               </form>
             ) : (
               <button
                 onClick={() => setEditing(true)}
-                className="mt-1 flex h-11 w-full items-center justify-between rounded-xl bg-stone-50 px-3 font-mono text-sm text-stone-700 ring-1 ring-stone-950/10"
+                className="mt-1 flex h-11 w-full items-center justify-between rounded-xl bg-stone-50 px-3 font-mono text-sm text-stone-700 ring-1 ring-stone-950/10 transition can-hover:bg-stone-100"
               >
                 {prefs.host}
                 <span className="font-sans text-xs font-semibold text-brand-600">Change</span>
@@ -230,13 +230,13 @@ function Shelf({ prefs, ready }) {
                         <button
                           disabled={!ready}
                           onClick={() => send(b.name)}
-                          className="flex h-9 items-center gap-1.5 rounded-full bg-brand-50 px-3 text-sm font-semibold text-brand-700 active:bg-brand-100 disabled:opacity-40"
+                          className="flex h-9 items-center gap-1.5 rounded-full bg-brand-50 px-3 text-sm font-semibold text-brand-700 transition active:bg-brand-100 disabled:opacity-40 can-hover:enabled:bg-brand-100"
                         >
                           <SendIcon className="size-4" /> Send
                         </button>
                         <button
                           onClick={() => removeDownload(b.name).then(reload)}
-                          className="-mr-2 grid size-9 place-items-center rounded-full text-stone-400 active:bg-stone-100"
+                          className="-mr-2 grid size-9 place-items-center rounded-full text-stone-400 transition active:bg-stone-100 can-hover:bg-stone-100"
                           aria-label={`Delete ${b.name}`}
                         >
                           <Trash2 className="size-4" />
@@ -297,19 +297,19 @@ function ReaderFiles({ base, onFoldersChanged }) {
         <button
           disabled={locked}
           onClick={() => setCreatingIn(path)}
-          className="flex h-9 items-center gap-1.5 rounded-full bg-surface px-3 text-sm font-semibold text-stone-700 ring-1 ring-stone-950/10 active:bg-stone-100"
+          className="flex h-9 items-center gap-1.5 rounded-full bg-surface px-3 text-sm font-semibold text-stone-700 ring-1 ring-stone-950/10 transition active:bg-stone-100 can-hover:enabled:bg-stone-100"
         >
           <FolderPlus className="size-4" /> New folder
         </button>
       </div>
       <div className="mt-2 flex flex-wrap items-center gap-1 text-sm">
-        <button disabled={locked} onClick={() => setPath('/')} className="rounded-md px-1.5 py-0.5 font-medium text-brand-600 active:bg-stone-100">
+        <button disabled={locked} onClick={() => setPath('/')} className="rounded-md px-1.5 py-0.5 font-medium text-brand-600 transition active:bg-stone-100 can-hover:enabled:bg-stone-100">
           SD card
         </button>
         {crumbs.map((c, i) => (
           <span key={i} className="flex items-center gap-1">
             <ChevronRight className="size-3.5 text-stone-300" />
-            <button disabled={locked} onClick={() => setPath(`/${crumbs.slice(0, i + 1).join('/')}`)} className="rounded-md px-1.5 py-0.5 font-medium text-brand-600 active:bg-stone-100">
+            <button disabled={locked} onClick={() => setPath(`/${crumbs.slice(0, i + 1).join('/')}`)} className="rounded-md px-1.5 py-0.5 font-medium text-brand-600 transition active:bg-stone-100 can-hover:enabled:bg-stone-100">
               {c}
             </button>
           </span>
@@ -331,7 +331,7 @@ function ReaderFiles({ base, onFoldersChanged }) {
                 <button
                   disabled={locked || !f.isDirectory}
                   onClick={() => setPath(full)}
-                  className="flex min-w-0 flex-1 items-center gap-3 text-left"
+                  className="flex min-w-0 flex-1 items-center gap-3 text-left transition can-hover:enabled:opacity-80"
                 >
                   {f.isDirectory ? <Folder className="size-5 shrink-0 text-brand-500" strokeWidth={1.75} /> : <FileText className="size-5 shrink-0 text-stone-400" strokeWidth={1.75} />}
                   <span className="min-w-0">
@@ -342,7 +342,7 @@ function ReaderFiles({ base, onFoldersChanged }) {
                 <button
                   disabled={locked}
                   onClick={() => setRenaming({ ...f, path: full })}
-                  className="grid size-9 place-items-center rounded-full text-stone-400 active:bg-stone-100"
+                  className="grid size-9 place-items-center rounded-full text-stone-400 transition active:bg-stone-100 can-hover:enabled:bg-stone-100"
                   aria-label={`Rename ${f.name}`}
                 >
                   <Pencil className="size-4" />
@@ -350,7 +350,7 @@ function ReaderFiles({ base, onFoldersChanged }) {
                 <button
                   disabled={locked}
                   onClick={() => setDeleting({ ...f, path: full })}
-                  className="-mr-2 grid size-9 place-items-center rounded-full text-stone-400 active:bg-stone-100"
+                  className="-mr-2 grid size-9 place-items-center rounded-full text-stone-400 transition active:bg-stone-100 can-hover:enabled:bg-stone-100"
                   aria-label={`Delete ${f.name}`}
                 >
                   <Trash2 className="size-4" />
@@ -510,7 +510,7 @@ export default function Send() {
                 add(e.dataTransfer.files)
               }}
               className={`mt-6 flex w-full flex-col items-center gap-2 rounded-xl border-2 border-dashed px-4 py-8 text-center transition active:scale-[0.99] ${
-                dragging ? 'border-brand-400 bg-brand-50' : 'border-stone-300 bg-surface/60'
+                dragging ? 'border-brand-400 bg-brand-50' : 'border-stone-300 bg-surface/60 can-hover:border-brand-300 can-hover:bg-brand-50/40'
               }`}
             >
               <BookUp className="size-8 text-brand-500" strokeWidth={1.5} />
@@ -546,7 +546,7 @@ export default function Send() {
                             !sending && (
                               <button
                                 onClick={() => setFiles((cur) => cur.filter((f) => f.file !== file))}
-                                className="-mr-2 grid size-9 place-items-center rounded-full text-stone-400 active:bg-stone-100"
+                                className="-mr-2 grid size-9 place-items-center rounded-full text-stone-400 transition active:bg-stone-100 can-hover:bg-stone-100"
                                 aria-label={`Remove ${file.name}`}
                               >
                                 <X className="size-4" />
@@ -567,7 +567,7 @@ export default function Send() {
               <button
                 disabled={sending || device.state !== 'ok'}
                 onClick={sendAll}
-                className="mt-4 flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-brand-500 text-base font-semibold text-white shadow-sm transition active:scale-[0.98] disabled:opacity-50"
+                className="mt-4 flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-brand-500 text-base font-semibold text-white shadow-sm transition active:scale-[0.98] disabled:opacity-50 can-hover:enabled:bg-brand-600"
               >
                 {sending ? <Loader2 className="size-5 animate-spin" /> : `Send ${pending} book${pending === 1 ? '' : 's'}`}
               </button>
@@ -580,7 +580,7 @@ export default function Send() {
       )}
       <a
         href="#/send/wallpaper"
-        className="mt-5 flex max-w-xl items-center gap-3 rounded-xl bg-surface px-4 py-3 shadow-sm ring-1 ring-stone-950/5 transition active:scale-[0.99] md:hover:bg-stone-50"
+        className="mt-5 flex max-w-xl items-center gap-3 rounded-xl bg-surface px-4 py-3 shadow-sm ring-1 ring-stone-950/5 transition active:scale-[0.99] can-hover:bg-stone-50"
       >
         <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600">
           <ImagePlus className="size-5" strokeWidth={1.75} />
