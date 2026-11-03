@@ -27,7 +27,7 @@ function Appearance({ theme: [pref, setPref] }) {
           aria-checked={pref === v}
           onClick={() => setPref(v)}
           className={`flex h-10 items-center justify-center gap-1.5 rounded-lg text-sm font-semibold transition ${
-            pref === v ? 'bg-raised text-stone-900 shadow-sm' : 'text-stone-500 active:bg-stone-200'
+            pref === v ? 'bg-raised text-stone-900 shadow-sm' : 'text-stone-500 active:bg-stone-200 can-hover:bg-stone-200/70'
           }`}
         >
           <Icon className="size-4" strokeWidth={2} />
@@ -115,7 +115,7 @@ export function ClientIdSetup({ session, conn, onSaved, onCancel }) {
               allowed in automatically. {conn.name} gives each account one app, so if you already have one, open it and choose{' '}
               <b>Edit</b> instead.
             </p>
-            <button type="button" onClick={() => open(DASHBOARD)} className="mt-1 font-medium text-brand-600">
+            <button type="button" onClick={() => open(DASHBOARD)} className="mt-1 font-medium text-brand-600 can-hover:underline can-hover:underline-offset-2">
               Open the developer dashboard
             </button>
           </div>
@@ -127,7 +127,7 @@ export function ClientIdSetup({ session, conn, onSaved, onCancel }) {
             <p>Paste it under <b>Redirect URIs</b> and choose Add, tick <b>Web API</b>, agree to the terms, then Save.</p>
             <div className="mt-1.5 flex items-center gap-2 rounded-xl bg-stone-50 p-2 ring-1 ring-stone-950/10">
               <code className="min-w-0 flex-1 font-mono text-xs break-all text-stone-900 select-all">{redirect}</code>
-              <button type="button" onClick={copy} aria-label="Copy redirect URI" className="shrink-0 rounded-lg p-1.5 text-stone-500 active:bg-stone-100">
+              <button type="button" onClick={copy} aria-label="Copy redirect URI" className="shrink-0 rounded-lg p-1.5 text-stone-500 transition active:bg-stone-100 can-hover:bg-stone-100">
                 <Copy className="size-4" />
               </button>
             </div>
@@ -152,7 +152,7 @@ export function ClientIdSetup({ session, conn, onSaved, onCancel }) {
               <button
                 type="submit"
                 disabled={!valid || busy}
-                className="flex h-11 w-full items-center justify-center rounded-xl bg-brand-500 text-sm font-semibold text-white transition active:scale-[0.98] disabled:opacity-50"
+                className="flex h-11 w-full items-center justify-center rounded-xl bg-brand-500 text-sm font-semibold text-white transition active:scale-[0.98] disabled:opacity-50 can-hover:enabled:bg-brand-600"
               >
                 {busy ? <Loader2 className="size-4 animate-spin" /> : 'Save Client ID'}
               </button>
@@ -162,7 +162,7 @@ export function ClientIdSetup({ session, conn, onSaved, onCancel }) {
       </ol>
       {error && <p className="text-sm text-red-700">{error}</p>}
       {onCancel && (
-        <button type="button" onClick={onCancel} className="text-sm font-medium text-stone-500">
+        <button type="button" onClick={onCancel} className="text-sm font-medium text-stone-500 transition can-hover:text-stone-800">
           Cancel
         </button>
       )}
@@ -294,7 +294,7 @@ export function LinkForm({ session, conn, onLinked }) {
         e.preventDefault()
         link(credential())
       }}
-      className="flex h-11 w-full items-center justify-center rounded-xl bg-brand-500 text-sm font-semibold text-white transition active:scale-[0.98] disabled:opacity-50"
+      className="flex h-11 w-full items-center justify-center rounded-xl bg-brand-500 text-sm font-semibold text-white transition active:scale-[0.98] disabled:opacity-50 can-hover:enabled:bg-brand-600"
     >
       {busy ? <Loader2 className="size-4 animate-spin" /> : label}
     </button>
@@ -303,7 +303,7 @@ export function LinkForm({ session, conn, onLinked }) {
   const tokenForm = (
     <form className="space-y-2">
       {help && (
-        <button type="button" onClick={() => open(help[1])} className="text-sm font-medium text-brand-600">
+        <button type="button" onClick={() => open(help[1])} className="text-sm font-medium text-brand-600 can-hover:underline can-hover:underline-offset-2">
           {help[0]}
         </button>
       )}
@@ -336,7 +336,7 @@ export function LinkForm({ session, conn, onLinked }) {
         <button
           type="button"
           onClick={startOAuth} // stays tappable: an abandoned browser sign-in just starts over
-          className="flex h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-brand-500 text-sm font-semibold text-white transition active:scale-[0.98] disabled:opacity-50"
+          className="flex h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-brand-500 text-sm font-semibold text-white transition active:scale-[0.98] disabled:opacity-50 can-hover:enabled:bg-brand-600"
         >
           {busy ? <><Loader2 className="size-4 animate-spin" /> Waiting for {conn.name}…</> : `Sign in with ${conn.name}`}
         </button>
@@ -349,16 +349,16 @@ export function LinkForm({ session, conn, onLinked }) {
               <span>
                 Your app&apos;s Client ID <span className="font-mono">…{own.slice(-4)}</span>
               </span>
-              <button type="button" onClick={() => setSetup(true)} className="font-medium text-brand-600">
+              <button type="button" onClick={() => setSetup(true)} className="font-medium text-brand-600 can-hover:underline can-hover:underline-offset-2">
                 Change
               </button>
-              <button type="button" onClick={removeClientId} className="font-medium text-brand-600">
+              <button type="button" onClick={removeClientId} className="font-medium text-brand-600 can-hover:underline can-hover:underline-offset-2">
                 Remove
               </button>
             </p>
           </>
         ) : (
-          <button type="button" onClick={() => setSetup(true)} className="text-xs font-medium text-brand-600">
+          <button type="button" onClick={() => setSetup(true)} className="text-xs font-medium text-brand-600 can-hover:underline can-hover:underline-offset-2">
             Use your own {conn.name} app
           </button>
         )}
@@ -371,14 +371,14 @@ export function LinkForm({ session, conn, onLinked }) {
           <button
             type="button"
             onClick={() => open(device.verification_uri_complete)}
-            className="flex h-11 w-full items-center justify-center rounded-xl bg-brand-500 text-sm font-semibold text-white"
+            className="flex h-11 w-full items-center justify-center rounded-xl bg-brand-500 text-sm font-semibold text-white transition can-hover:bg-brand-600"
           >
             Approve on {conn.name}
           </button>
         )}
         <p className="text-xs text-stone-500">
           Or go to{' '}
-          <button type="button" onClick={() => open(device.verification_uri)} className="font-medium text-brand-600">
+          <button type="button" onClick={() => open(device.verification_uri)} className="font-medium text-brand-600 can-hover:underline can-hover:underline-offset-2">
             {device.verification_uri.replace(/^https?:\/\//, '')}
           </button>{' '}
           and enter
@@ -394,7 +394,7 @@ export function LinkForm({ session, conn, onLinked }) {
           type="button"
           disabled={busy}
           onClick={startDevice}
-          className="flex h-11 w-full items-center justify-center rounded-xl bg-brand-500 text-sm font-semibold text-white transition active:scale-[0.98] disabled:opacity-50"
+          className="flex h-11 w-full items-center justify-center rounded-xl bg-brand-500 text-sm font-semibold text-white transition active:scale-[0.98] disabled:opacity-50 can-hover:enabled:bg-brand-600"
         >
           {busy ? <Loader2 className="size-4 animate-spin" /> : `Sign in with ${conn.name}`}
         </button>
@@ -496,7 +496,7 @@ function Service({ session, conn, onChange }) {
               <a
                 href={`#/settings/${conn.id}`}
                 aria-label={`${conn.name} matches`}
-                className="grid size-9 place-items-center rounded-full text-stone-500 active:bg-stone-100 md:hover:bg-stone-100"
+                className="grid size-9 place-items-center rounded-full text-stone-500 transition active:bg-stone-100 can-hover:bg-stone-100"
               >
                 <ListChecks className="size-4" />
               </a>
@@ -515,7 +515,7 @@ function Service({ session, conn, onChange }) {
                   })
                 })
               }
-              className="grid size-9 place-items-center rounded-full text-stone-500 active:bg-stone-100 md:hover:bg-stone-100"
+              className="grid size-9 place-items-center rounded-full text-stone-500 transition active:bg-stone-100 can-hover:bg-stone-100"
             >
               {busy === 'sync' ? <Loader2 className="size-4 animate-spin" /> : <RefreshCw className="size-4" />}
             </button>
@@ -523,7 +523,7 @@ function Service({ session, conn, onChange }) {
               type="button"
               disabled={!!busy}
               onClick={() => setUnlinking(true)}
-              className="h-9 rounded-full px-3 text-sm font-medium text-red-600 active:bg-stone-100 md:hover:bg-stone-100"
+              className="h-9 rounded-full px-3 text-sm font-medium text-red-600 transition active:bg-stone-100 can-hover:bg-stone-100"
             >
               {busy === 'unlink' ? <Loader2 className="size-4 animate-spin" /> : 'Unlink'}
             </button>
@@ -532,7 +532,7 @@ function Service({ session, conn, onChange }) {
           <button
             type="button"
             onClick={() => setOpenForm(!openForm)}
-            className="h-9 shrink-0 rounded-full px-3.5 text-sm font-semibold text-brand-600 ring-1 ring-brand-200 active:bg-brand-50"
+            className="h-9 shrink-0 rounded-full px-3.5 text-sm font-semibold text-brand-600 ring-1 ring-brand-200 transition active:bg-brand-50 can-hover:bg-brand-50"
           >
             {openForm ? 'Cancel' : needsRelink ? 'Relink' : 'Link'}
           </button>
@@ -717,7 +717,7 @@ function Profile({ session }) {
     await navigator.clipboard.writeText(text)
     notify({ title: `${what} copied` })
   }
-  const button = 'flex h-10 flex-1 items-center justify-center gap-2 rounded-xl bg-stone-100 text-sm font-semibold text-stone-800 active:bg-stone-200'
+  const button = 'flex h-10 flex-1 items-center justify-center gap-2 rounded-xl bg-stone-100 text-sm font-semibold text-stone-800 transition active:bg-stone-200 can-hover:bg-stone-200'
   return (
     <Card className="mt-3 divide-y divide-stone-100">
       <label className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-stone-800">
@@ -744,7 +744,7 @@ function Profile({ session }) {
       </label>
       {url && (
         <div className="space-y-2 px-4 py-3">
-          <a href={url} target="_blank" rel="noreferrer" onClick={(e) => isApp && (e.preventDefault(), openUrl(url))} className="block truncate font-mono text-xs text-brand-600">
+          <a href={url} target="_blank" rel="noreferrer" onClick={(e) => isApp && (e.preventDefault(), openUrl(url))} className="block truncate font-mono text-xs text-brand-600 can-hover:underline can-hover:underline-offset-2">
             {url}
           </a>
           <div className="flex gap-2">
@@ -768,7 +768,7 @@ export function AccountTransfer({ session }) {
   const [error, setError] = useState(null)
   const [saved, setSaved] = useState(null)
   const input = useRef(null)
-  const button = 'min-h-11 rounded-xl bg-stone-100 px-4 text-sm font-semibold text-stone-800 disabled:opacity-50'
+  const button = 'min-h-11 rounded-xl bg-stone-100 px-4 text-sm font-semibold text-stone-800 transition disabled:opacity-50 can-hover:enabled:bg-stone-200'
   async function download() {
     setBusy(true)
     setError(null)
@@ -836,7 +836,7 @@ function Account({ session, onSession, onLogout }) {
   const [editing, setEditing] = useState(false)
   const [pw, setPw] = useState({ next: '', again: '' })
   const [busy, setBusy] = useState(null)
-  const row = 'flex w-full items-center gap-3 px-4 py-3 text-left text-sm font-medium active:bg-stone-50'
+  const row = 'flex w-full items-center gap-3 px-4 py-3 text-left text-sm font-medium transition active:bg-stone-50 can-hover:bg-stone-50'
 
   async function run(kind, fn) {
     setBusy(kind)
@@ -891,7 +891,7 @@ function Account({ session, onSession, onLogout }) {
           />
           <button
             disabled={!!busy || !!action}
-            className="flex h-11 w-full items-center justify-center rounded-xl bg-brand-500 text-sm font-semibold text-white transition active:scale-[0.98] disabled:opacity-50"
+            className="flex h-11 w-full items-center justify-center rounded-xl bg-brand-500 text-sm font-semibold text-white transition active:scale-[0.98] disabled:opacity-50 can-hover:enabled:bg-brand-600"
           >
             {busy === 'password' ? <Loader2 className="size-4 animate-spin" /> : 'Save password'}
           </button>
@@ -948,7 +948,7 @@ export default function Settings({ session, theme, onSession, onLogout }) {
   return (
     <div className="settings-page max-w-2xl px-4 pt-2 pb-8 md:px-8 md:pt-6 lg:px-12">
       <div className="settings-header flex min-h-11 items-center gap-6">
-        <a href="#/" aria-label="Back to Library" className="native-hide grid size-11 shrink-0 place-items-center rounded-full text-brand-600 transition active:bg-stone-200/70 md:hover:bg-stone-100">
+        <a href="#/" aria-label="Back to Library" className="native-hide grid size-11 shrink-0 place-items-center rounded-full text-brand-600 transition active:bg-stone-200/70 can-hover:bg-stone-100">
           <ArrowLeft className="size-6" strokeWidth={2} />
         </a>
         <h1 className="font-display text-3xl font-semibold tracking-tight text-stone-900 md:text-4xl">Settings</h1>
@@ -968,7 +968,7 @@ export default function Settings({ session, theme, onSession, onLogout }) {
         <>
           <h2 className={section}>Library</h2>
           <Card className="mt-3">
-            <a href="#/browse/manage" className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-stone-800 active:bg-stone-50">
+            <a href="#/browse/manage" className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-stone-800 transition active:bg-stone-50 can-hover:bg-stone-50">
               <Server className="size-5 text-stone-500" strokeWidth={1.75} />
               <span className="flex-1">Catalogs</span>
               <ChevronRight className="size-4 text-stone-400" />
@@ -1004,7 +1004,7 @@ export default function Settings({ session, theme, onSession, onLogout }) {
       <button
         type="button"
         onClick={onLogout}
-        className="mt-8 flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-surface text-sm font-semibold text-red-600 ring-1 ring-stone-950/10 active:bg-stone-50"
+        className="mt-8 flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-surface text-sm font-semibold text-red-600 ring-1 ring-stone-950/10 transition active:bg-stone-50 can-hover:bg-stone-50"
       >
         <LogOut className="size-4" /> Sign out
       </button>
@@ -1025,7 +1025,7 @@ export function Matches({ session, id }) {
   return (
     <div className="max-w-2xl px-4 pt-6 pb-8 md:px-8 md:pt-6 lg:px-12">
       <div className="mb-6 flex h-11 items-center md:mb-0">
-        <a href="#/settings" className="native-hide flex h-11 items-center gap-1.5 text-sm font-medium text-stone-500">
+        <a href="#/settings" className="native-hide flex h-11 items-center gap-1.5 text-sm font-medium text-stone-500 transition can-hover:text-stone-800">
           <ArrowLeft className="size-4" /> Settings
         </a>
       </div>
@@ -1067,7 +1067,7 @@ export function Matches({ session, id }) {
                 <button
                   type="button"
                   onClick={() => setPicking(picking === b.document ? null : b.document)}
-                  className="h-8 shrink-0 rounded-full px-3 text-sm font-semibold text-brand-600 ring-1 ring-brand-200 active:bg-brand-50"
+                  className="h-8 shrink-0 rounded-full px-3 text-sm font-semibold text-brand-600 ring-1 ring-brand-200 transition active:bg-brand-50 can-hover:bg-brand-50"
                 >
                   {picking === b.document ? 'Cancel' : b.matched ? 'Change' : 'Match'}
                 </button>
@@ -1130,7 +1130,7 @@ export function Picker({ session, id, name, book, onDone }) {
         type="button"
         disabled={busy}
         onClick={() => choose(c)}
-        className="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left active:bg-stone-50 md:hover:bg-stone-50"
+        className="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition active:bg-stone-50 can-hover:bg-stone-50"
       >
         <span className="min-w-0 flex-1">
           <span className="block truncate text-sm text-stone-900">{c.title}</span>
@@ -1165,11 +1165,11 @@ export function Picker({ session, id, name, book, onDone }) {
         }}
       >
         <input className={`${field} bg-surface`} placeholder={`Search ${name}`} value={q} onChange={(e) => setQ(e.target.value)} />
-        <button aria-label="Search" className="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-500 text-white">
+        <button aria-label="Search" className="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-500 text-white transition can-hover:bg-brand-600">
           <Search className="size-4" />
         </button>
       </form>
-      <button type="button" disabled={busy} onClick={() => choose(null)} className="mt-2 w-full py-2 text-sm font-medium text-stone-500">
+      <button type="button" disabled={busy} onClick={() => choose(null)} className="mt-2 w-full py-2 text-sm font-medium text-stone-500 transition can-hover:text-stone-800">
         Don&apos;t sync this book
       </button>
     </div>
