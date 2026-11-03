@@ -109,7 +109,7 @@ function Login({ onLogin }) {
               type="button"
               onClick={() => setForm({ ...form, selfHosted: v })}
               className={`h-10 rounded-xl text-sm font-semibold transition ${
-                form.selfHosted === v ? 'bg-raised text-stone-900 shadow-sm' : 'text-stone-500 active:bg-stone-200'
+                form.selfHosted === v ? 'bg-raised text-stone-900 shadow-sm' : 'text-stone-500 active:bg-stone-200 can-hover:bg-stone-200/70'
               }`}
             >
               {label}
@@ -163,7 +163,7 @@ function Login({ onLogin }) {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="-mr-2 grid size-10 place-items-center rounded-full text-stone-400 active:bg-stone-100"
+                className="-mr-2 grid size-10 place-items-center rounded-full text-stone-400 transition active:bg-stone-100 can-hover:bg-stone-100"
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? <EyeOff className="size-5" strokeWidth={1.75} /> : <Eye className="size-5" strokeWidth={1.75} />}
@@ -177,7 +177,7 @@ function Login({ onLogin }) {
         <div className="mx-auto mt-auto w-full max-w-sm px-2 pt-6 md:mt-8 md:max-w-none md:px-0">
           <button
             disabled={busy}
-            className="flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-brand-500 text-base font-semibold text-white shadow-sm transition active:scale-[0.98] active:bg-brand-600 disabled:opacity-60"
+            className="flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-brand-500 text-base font-semibold text-white shadow-sm transition active:scale-[0.98] active:bg-brand-600 disabled:opacity-60 can-hover:enabled:bg-brand-600"
           >
             {busy ? <Loader2 className="size-5 animate-spin" /> : creating ? 'Create account' : 'Sign in'}
           </button>
@@ -189,7 +189,7 @@ function Login({ onLogin }) {
                 setCreating(!creating)
                 setError(null)
               }}
-              className="font-semibold text-brand-600"
+              className="font-semibold text-brand-600 can-hover:underline can-hover:underline-offset-2"
             >
               {creating ? 'Sign in' : 'Create one'}
             </button>
@@ -270,7 +270,7 @@ function SettingsLink() {
     <a
       href="#/settings"
       aria-label="Settings"
-      className="native-hide absolute top-4 right-3 z-20 grid size-11 place-items-center rounded-full text-stone-600 active:bg-stone-200/70 md:hidden"
+      className="native-hide absolute top-4 right-3 z-20 grid size-11 place-items-center rounded-full text-stone-600 transition active:bg-stone-200/70 can-hover:bg-stone-200/70 md:hidden"
     >
       <SettingsIcon className="size-6" strokeWidth={1.75} />
     </a>
@@ -293,7 +293,7 @@ function Sidebar({ route, session }) {
             key={n.href}
             href={n.href}
             className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-semibold transition ${
-              n.active(route) ? 'bg-brand-50 text-brand-700' : 'text-stone-600 hover:bg-stone-100 hover:text-stone-900'
+              n.active(route) ? 'bg-brand-50 text-brand-700' : 'text-stone-600 can-hover:bg-stone-100 can-hover:text-stone-900'
             }`}
           >
             <n.icon className="size-5" strokeWidth={1.75} />
@@ -305,7 +305,7 @@ function Sidebar({ route, session }) {
         <a
           href="#/settings"
           className={`flex items-center gap-3 rounded-lg px-3 py-2 transition ${
-            route === 'settings' ? 'bg-brand-50 text-brand-700' : 'text-stone-600 hover:bg-stone-100 hover:text-stone-900'
+            route === 'settings' ? 'bg-brand-50 text-brand-700' : 'text-stone-600 can-hover:bg-stone-100 can-hover:text-stone-900'
           }`}
         >
           <SettingsIcon className="size-5 shrink-0" strokeWidth={1.75} />
@@ -467,7 +467,7 @@ export default function App() {
         {signOut.error ? <>
           <p role="alert" className="text-sm text-red-600">Couldn’t finish signing out. {signOut.error}</p>
           <p className="text-sm text-stone-500">Retry to clear saved Shortcuts data and finish signing out.</p>
-          <button type="button" onClick={handleLogout} className="h-12 w-full rounded-2xl bg-brand-600 text-sm font-semibold text-white">Retry sign out</button>
+          <button type="button" onClick={handleLogout} className="h-12 w-full rounded-2xl bg-brand-600 text-sm font-semibold text-white transition can-hover:bg-brand-700">Retry sign out</button>
         </> : <p role="status" className="flex items-center justify-center gap-2 text-sm text-stone-600"><Loader2 className="size-4 animate-spin" /> Signing out…</p>}
       </div>
     </main>

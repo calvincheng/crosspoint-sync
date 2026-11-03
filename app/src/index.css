@@ -1,6 +1,27 @@
 /* Design tokens copied from crosspoint-tools/src/index.css (Free-Ink). Keep in sync by hand. */
 @import "tailwindcss";
 
+/* Hover styles only on devices with a hover-capable, precise pointer. Unlike
+   md:hover, this follows the input device rather than the viewport width, so
+   tablets and touch laptops don't get sticky hover states. The variant includes
+   :hover itself: use `can-hover:bg-…`, not `can-hover:hover:bg-…`. */
+@custom-variant can-hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @slot;
+    }
+  }
+}
+
+/* The same condition for a child of a hovered `.group` parent. */
+@custom-variant group-can-hover {
+  @media (hover: hover) and (pointer: fine) {
+    :where(.group):hover & {
+      @slot;
+    }
+  }
+}
+
 @theme {
   /* Inter for body/UI, Lora for headlines (the original CrossPoint serif),
      Geist Mono for technical text. */

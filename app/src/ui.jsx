@@ -91,7 +91,7 @@ export function Sheet({ title, onClose, children }) {
           ...(keyboard && { paddingBottom: '0.25rem' }),
         }} className="relative max-h-[88dvh] w-full overflow-y-auto overscroll-contain rounded-t-[28px] bg-stone-50 [clip-path:inset(0_round_28px_28px_0_0)] p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] md:max-w-lg md:rounded-[28px] md:[clip-path:inset(0_round_28px)] md:p-6">
         <div className="mx-auto mb-4 h-1.5 w-10 rounded-full bg-stone-300 md:hidden" />
-        <button onClick={onClose} className="absolute top-3 right-3 grid size-10 place-items-center rounded-full text-stone-500 active:bg-stone-200" aria-label="Close">
+        <button onClick={onClose} className="absolute top-3 right-3 grid size-10 place-items-center rounded-full text-stone-500 transition active:bg-stone-200 can-hover:bg-stone-200/70" aria-label="Close">
           <X className="size-5" />
         </button>
         <h2 className="pr-10 font-display text-xl font-semibold text-stone-900">{title}</h2>
@@ -139,10 +139,10 @@ export function ActionSheet({ title, children, actionLabel, pendingLabel, onConf
         )}
         {error && <p role="alert" className="mt-3 text-sm text-red-600">{error}</p>}
         <div className="mt-5 grid gap-2">
-          <button type="submit" disabled={busy || !valid} className={`h-12 rounded-xl text-base font-semibold text-white disabled:opacity-60 ${danger ? 'bg-red-600 active:bg-red-700' : 'bg-brand-500 active:bg-brand-600'}`}>
+          <button type="submit" disabled={busy || !valid} className={`h-12 rounded-xl text-base font-semibold text-white transition disabled:opacity-60 ${danger ? 'bg-red-600 active:bg-red-700 can-hover:enabled:bg-red-700' : 'bg-brand-500 active:bg-brand-600 can-hover:enabled:bg-brand-600'}`}>
             {busy ? pendingLabel : actionLabel}
           </button>
-          <button type="button" disabled={busy} onClick={close} className="h-12 rounded-xl bg-surface text-base font-semibold text-stone-700 ring-1 ring-stone-950/10 active:bg-stone-100 disabled:opacity-60">
+          <button type="button" disabled={busy} onClick={close} className="h-12 rounded-xl bg-surface text-base font-semibold text-stone-700 ring-1 ring-stone-950/10 transition active:bg-stone-100 disabled:opacity-60 can-hover:enabled:bg-stone-100">
             Cancel
           </button>
         </div>
@@ -361,7 +361,7 @@ export function Toaster() {
         role="status"
         aria-live="polite"
         onClick={() => setToast(null)}
-        className="toast-in pointer-events-auto flex w-full max-w-sm items-center gap-3 rounded-xl bg-raised px-4 py-3 text-left shadow-lg ring-1 ring-stone-950/10"
+        className="toast-in pointer-events-auto flex w-full max-w-sm items-center gap-3 rounded-xl bg-raised px-4 py-3 text-left shadow-lg ring-1 ring-stone-950/10 transition can-hover:bg-stone-100"
       >
         <span className={`grid size-9 shrink-0 place-items-center rounded-full ${toast.error ? 'bg-red-50 text-red-600' : 'bg-brand-50 text-brand-600'}`}>
           <Icon className="size-5" strokeWidth={2} />
@@ -466,7 +466,7 @@ export function ViaHardcover({ slug, inline = false }) {
         e.preventDefault()
         import('@tauri-apps/plugin-opener').then(({ openUrl }) => openUrl(url))
       }}
-      className={`${inline ? '' : 'absolute top-3 right-4 '}text-[0.65rem] font-medium text-stone-400 hover:text-stone-600`}
+      className={`${inline ? '' : 'absolute top-3 right-4 '}text-[0.65rem] font-medium text-stone-400 can-hover:text-stone-600`}
     >
       via Hardcover
     </a>
@@ -518,7 +518,7 @@ export function EmptyState({ icon: Icon, note, title, children, action, compact 
 /** The pill button used as an empty state's action. */
 export function EmptyAction({ href, onClick, children }) {
   const cls =
-    'inline-flex min-h-10 items-center justify-center gap-1.5 rounded-full bg-brand-500 px-4 py-2 text-center text-sm font-semibold text-white transition active:scale-[0.98] md:hover:bg-brand-600'
+    'inline-flex min-h-10 items-center justify-center gap-1.5 rounded-full bg-brand-500 px-4 py-2 text-center text-sm font-semibold text-white transition active:scale-[0.98] can-hover:bg-brand-600'
   return href ? (
     <a href={href} className={cls}>
       {children}
