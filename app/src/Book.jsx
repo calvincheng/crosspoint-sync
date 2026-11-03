@@ -140,7 +140,7 @@ export function ClipMenu({ onDelete }) {
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen(!open)}
-        className="grid size-8 place-items-center rounded-full text-stone-500 hover:bg-stone-100"
+        className="grid size-8 place-items-center rounded-full text-stone-500 transition can-hover:bg-stone-100"
       >
         <MoreHorizontal className="size-5" />
       </button>
@@ -155,7 +155,7 @@ export function ClipMenu({ onDelete }) {
                 setOpen(false)
                 onDelete()
               }}
-              className="flex w-full items-center gap-3 px-4 py-3 text-left text-sm font-medium text-red-600 hover:bg-stone-50"
+              className="flex w-full items-center gap-3 px-4 py-3 text-left text-sm font-medium text-red-600 transition can-hover:bg-stone-50"
             >
               <Trash2 className="size-4" /> Delete clip
             </button>
@@ -182,10 +182,10 @@ export function DeleteClip({ session, clip, document, onDone, onClose }) {
     <Sheet title="Delete this clip?" onClose={onClose}>
       <blockquote className="mt-3 line-clamp-3 border-l-2 border-brand-300 pl-3 font-display text-[0.95rem]/relaxed text-stone-600 italic">{clip.text}</blockquote>
       <div className="mt-5 grid gap-2">
-        <button disabled={busy} onClick={remove} className="h-12 rounded-xl bg-red-600 text-base font-semibold text-white active:bg-red-700 disabled:opacity-60">
+        <button disabled={busy} onClick={remove} className="h-12 rounded-xl bg-red-600 text-base font-semibold text-white transition active:bg-red-700 disabled:opacity-60 can-hover:enabled:bg-red-700">
           Delete
         </button>
-        <button onClick={onClose} className="h-12 rounded-xl bg-surface text-base font-semibold text-stone-700 ring-1 ring-stone-950/10 active:bg-stone-100">
+        <button onClick={onClose} className="h-12 rounded-xl bg-surface text-base font-semibold text-stone-700 ring-1 ring-stone-950/10 transition active:bg-stone-100 can-hover:bg-stone-100">
           Cancel
         </button>
       </div>
@@ -223,7 +223,7 @@ function Clippings({ session, book, revision = 0 }) {
               <div className="mt-2 flex items-center justify-between">
                 <button
                   onClick={() => setSharing(c)}
-                  className="-ml-2 flex h-9 items-center gap-1.5 rounded-full px-2 text-sm font-medium text-brand-600 active:bg-stone-100"
+                  className="-ml-2 flex h-9 items-center gap-1.5 rounded-full px-2 text-sm font-medium text-brand-600 transition active:bg-stone-100 can-hover:bg-stone-100"
                   aria-label="Share clipping"
                 >
                   <ShareIcon className="size-4" /> Share
@@ -319,7 +319,7 @@ function CoverPicker({ session, book, onDone, onClose }) {
         <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-4">
           {items.map((c) => (
             <button key={c.url} disabled={busy} onClick={() => choose({ cover_url: c.url })} className="group text-left">
-              <img src={c.url} alt="" loading="lazy" className="aspect-[2/3] w-full rounded-md object-cover shadow-sm ring-1 ring-stone-950/10 group-active:scale-[0.98]" />
+              <img src={c.url} alt="" loading="lazy" className="aspect-[2/3] w-full rounded-md object-cover shadow-sm ring-1 ring-stone-950/10 transition group-active:scale-[0.98] group-can-hover:-translate-y-0.5 group-can-hover:shadow-md" />
               <p className="mt-1 truncate text-[0.7rem] text-stone-500">{c.source}</p>
             </button>
           ))}
@@ -333,11 +333,11 @@ function CoverPicker({ session, book, onDone, onClose }) {
         }}
       >
         <input className={field} value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Or paste an image link" inputMode="url" autoCapitalize="none" />
-        <button disabled={busy} className="h-11 shrink-0 rounded-xl bg-brand-500 px-4 text-sm font-semibold text-white disabled:opacity-60">
+        <button disabled={busy} className="h-11 shrink-0 rounded-xl bg-brand-500 px-4 text-sm font-semibold text-white transition disabled:opacity-60 can-hover:enabled:bg-brand-600">
           Use
         </button>
       </form>
-      <button disabled={busy} onClick={() => choose({ cover_url: null })} className="mt-3 w-full py-2 text-sm font-medium text-stone-500 active:text-stone-800">
+      <button disabled={busy} onClick={() => choose({ cover_url: null })} className="mt-3 w-full py-2 text-sm font-medium text-stone-500 transition active:text-stone-800 can-hover:text-stone-800">
         Use automatic cover
       </button>
     </Sheet>
@@ -391,7 +391,7 @@ function MergePicker({ session, book, books, onDone, onClose }) {
       {shown.length === 0 && <p className="mt-4 text-center text-sm text-stone-500">No book matches.</p>}
       <Card className="mt-4 divide-y divide-stone-100">
         {shown.map((b) => (
-          <button key={b.document} onClick={() => setSelected({ book: b, stats })} className="flex w-full items-center gap-3 px-4 py-3 text-left active:bg-stone-50">
+          <button key={b.document} onClick={() => setSelected({ book: b, stats })} className="flex w-full items-center gap-3 px-4 py-3 text-left transition active:bg-stone-50 can-hover:bg-stone-50">
             <Cover session={session} book={b} small className="w-9" />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-semibold text-stone-900">{b.title || b.filename || 'Untitled book'}</p>
@@ -478,12 +478,12 @@ function DatesSheet({ session, book, activity: a, onDone, onClose }) {
               type="button"
               disabled={saving}
               onClick={() => send({ start_date: null, finished_date: null })}
-              className="h-11 rounded-xl px-4 text-sm font-semibold text-stone-700 ring-1 ring-stone-950/10 active:bg-stone-100 disabled:opacity-60"
+              className="h-11 rounded-xl px-4 text-sm font-semibold text-stone-700 ring-1 ring-stone-950/10 transition active:bg-stone-100 disabled:opacity-60 can-hover:enabled:bg-stone-100"
             >
               Use reader&apos;s dates
             </button>
           )}
-          <button disabled={saving} className="ml-auto h-11 shrink-0 rounded-xl bg-brand-500 px-5 text-sm font-semibold text-white disabled:opacity-60">
+          <button disabled={saving} className="ml-auto h-11 shrink-0 rounded-xl bg-brand-500 px-5 text-sm font-semibold text-white transition disabled:opacity-60 can-hover:enabled:bg-brand-600">
             Save
           </button>
         </div>
@@ -516,7 +516,7 @@ function ChipField({ label, items, onChange, max, placeholder }) {
           {items.map((name) => (
             <li key={name} className="flex items-center gap-1 rounded-full bg-stone-100 py-1 pr-1 pl-3 text-sm text-stone-800">
               {name}
-              <button type="button" aria-label={`Remove ${name}`} onClick={() => onChange(items.filter((i) => i !== name))} className="grid size-7 place-items-center rounded-full text-stone-500 active:bg-stone-200">
+              <button type="button" aria-label={`Remove ${name}`} onClick={() => onChange(items.filter((i) => i !== name))} className="grid size-7 place-items-center rounded-full text-stone-500 transition active:bg-stone-200 can-hover:bg-stone-200">
                 <X className="size-3.5" />
               </button>
             </li>
@@ -540,7 +540,7 @@ function ChipField({ label, items, onChange, max, placeholder }) {
           enterKeyHint="done"
           className={field}
         />
-        <button type="button" onClick={add} disabled={full || !draft.trim()} className="h-11 shrink-0 rounded-xl px-4 text-sm font-semibold text-brand-600 ring-1 ring-stone-950/10 disabled:opacity-40">
+        <button type="button" onClick={add} disabled={full || !draft.trim()} className="h-11 shrink-0 rounded-xl px-4 text-sm font-semibold text-brand-600 ring-1 ring-stone-950/10 transition disabled:opacity-40 can-hover:enabled:bg-brand-50">
           Add
         </button>
       </div>
@@ -638,7 +638,7 @@ function EditDetailsSheet({ session, book: current, onDone, onClose }) {
             <input value={pages} onChange={(e) => setPages(e.target.value.replace(/\D/g, ''))} inputMode="numeric" placeholder="e.g. 384" className={`${field} mt-1.5`} />
           </label>
         </div>
-        <button disabled={saving} className="flex h-11 w-full items-center justify-center rounded-xl bg-brand-500 text-sm font-semibold text-white disabled:opacity-60">
+        <button disabled={saving} className="flex h-11 w-full items-center justify-center rounded-xl bg-brand-500 text-sm font-semibold text-white transition disabled:opacity-60 can-hover:enabled:bg-brand-600">
           {saving ? <Loader2 className="size-4 animate-spin" /> : 'Save'}
         </button>
       </form>
@@ -664,7 +664,7 @@ function BookMenu({ session, book, books, activity, onChange }) {
         setMenu(false)
         run()
       }}
-      className={`flex w-full items-center gap-3 px-4 py-3 text-left text-sm font-medium active:bg-stone-50 md:hover:bg-stone-50 ${danger ? 'text-red-600' : 'text-stone-800'}`}
+      className={`flex w-full items-center gap-3 px-4 py-3 text-left text-sm font-medium transition active:bg-stone-50 can-hover:bg-stone-50 ${danger ? 'text-red-600' : 'text-stone-800'}`}
     >
       <Icon className={`size-4 ${danger ? '' : 'text-stone-400'}`} /> {label}
       {extra}
@@ -679,7 +679,7 @@ function BookMenu({ session, book, books, activity, onChange }) {
         aria-haspopup="menu"
         aria-expanded={menu}
         onClick={() => setMenu(!menu)}
-        className="native-hide grid size-11 place-items-center rounded-full text-stone-600 transition active:bg-stone-200/70 md:hover:bg-stone-100"
+        className="native-hide grid size-11 place-items-center rounded-full text-stone-600 transition active:bg-stone-200/70 can-hover:bg-stone-100"
       >
         <MoreHorizontal className="size-6" />
       </button>
@@ -769,7 +769,7 @@ function Details({ book }) {
       )}
       {warnings.length > 0 && (
         <details className="text-xs text-stone-500">
-          <summary className="cursor-pointer font-medium">Content warnings ({warnings.length})</summary>
+          <summary className="cursor-pointer font-medium transition can-hover:text-stone-800">Content warnings ({warnings.length})</summary>
           <p className="mt-1.5 text-stone-600">{warnings.join(', ')}</p>
         </details>
       )}
@@ -824,7 +824,7 @@ function Services({ session, book, onSync }) {
                 {m.match_by !== 'document' && <button
                   type="button"
                   onClick={() => setPicking(picking === m.id ? null : m.id)}
-                  className="h-8 shrink-0 rounded-full px-3 text-sm font-semibold text-brand-600 ring-1 ring-brand-200 active:bg-brand-50"
+                  className="h-8 shrink-0 rounded-full px-3 text-sm font-semibold text-brand-600 ring-1 ring-brand-200 transition active:bg-brand-50 can-hover:bg-brand-50"
                 >
                   {picking === m.id ? 'Cancel' : m.matched ? 'Change' : 'Match'}
                 </button>}
@@ -833,7 +833,7 @@ function Services({ session, book, onSync }) {
               {m.matched && m.sync?.enabled && (m.sync.read || m.sync.write) && (
                 <div className="mt-3">
                   <button type="button" disabled={!!syncing} onClick={() => sync(m)}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-full px-4 text-sm font-semibold text-brand-600 ring-1 ring-brand-200 disabled:opacity-60">
+                    className="inline-flex min-h-11 items-center gap-2 rounded-full px-4 text-sm font-semibold text-brand-600 ring-1 ring-brand-200 transition disabled:opacity-60 can-hover:enabled:bg-brand-50">
                     {syncing === m.id && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
                     {syncing === m.id ? 'Syncing…' : 'Sync now'}
                   </button>
@@ -882,7 +882,7 @@ function About({ session, book, revision }) {
         {description}
       </p>
       {(long || open) && (
-        <button type="button" onClick={() => setOpen(!open)} className="mt-1 text-sm font-semibold text-brand-600">
+        <button type="button" onClick={() => setOpen(!open)} className="mt-1 text-sm font-semibold text-brand-600 can-hover:underline can-hover:underline-offset-2">
           {open ? 'Show less' : 'Read more'}
         </button>
       )}
@@ -915,7 +915,7 @@ function NextInSeries({ book, data }) {
           {isApp && (
             <a
               href={`#/browse/search/${encodeURIComponent(query)}`}
-              className="mt-2 inline-flex h-9 items-center gap-1.5 rounded-full bg-brand-500 px-3.5 text-xs font-semibold text-white transition active:scale-[0.98]"
+              className="mt-2 inline-flex h-9 items-center gap-1.5 rounded-full bg-brand-500 px-3.5 text-xs font-semibold text-white transition active:scale-[0.98] can-hover:bg-brand-600"
             >
               <Search className="size-3.5" strokeWidth={2.25} /> Find it in your catalogs
             </a>
@@ -940,7 +940,7 @@ export default function Book({ session, book, books, activity, back = { href: '#
       <div className="-mr-2 mb-6 flex h-11 items-center md:mb-0">
         <a
           href={back.href}
-          className="native-hide -ml-2 flex h-11 items-center gap-1.5 rounded-full pr-4 pl-2 text-lg font-semibold text-brand-600 transition active:bg-stone-200/70 md:hover:bg-stone-100"
+          className="native-hide -ml-2 flex h-11 items-center gap-1.5 rounded-full pr-4 pl-2 text-lg font-semibold text-brand-600 transition active:bg-stone-200/70 can-hover:bg-stone-100"
         >
           <ArrowLeft className="size-6" strokeWidth={2} /> {back.label}
         </a>
