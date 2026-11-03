@@ -31,7 +31,7 @@ function Segmented({ value, options, onChange }) {
           type="button"
           onClick={() => onChange(v)}
           className={`h-9 rounded-lg px-2 text-sm font-semibold whitespace-nowrap transition ${
-            value === v ? 'bg-raised text-stone-900 shadow-sm' : 'text-stone-500 active:bg-stone-200'
+            value === v ? 'bg-raised text-stone-900 shadow-sm' : 'text-stone-500 active:bg-stone-200 can-hover:bg-stone-200/70'
           }`}
         >
           {label}
@@ -115,7 +115,7 @@ function Community({ onPick }) {
     <section className="mt-8">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3">
         <h2 className="font-display text-xl font-semibold text-stone-900">Community wallpapers</h2>
-        <a href="https://www.readme.club/wallpapers" target="_blank" rel="noreferrer" className="text-xs font-medium text-stone-500">
+        <a href="https://www.readme.club/wallpapers" target="_blank" rel="noreferrer" className="text-xs font-medium text-stone-500 can-hover:underline can-hover:underline-offset-2">
           from readme.club
         </a>
       </div>
@@ -153,7 +153,7 @@ function Community({ onPick }) {
                 src={w.thumb}
                 alt=""
                 loading="lazy"
-                className="aspect-[3/5] w-full rounded-lg bg-stone-100 object-cover ring-1 ring-stone-950/10 transition group-active:scale-[0.97]"
+                className="aspect-[3/5] w-full rounded-lg bg-stone-100 object-cover ring-1 ring-stone-950/10 transition group-active:scale-[0.97] group-can-hover:-translate-y-0.5 group-can-hover:shadow-md"
               />
               <p className="mt-1 truncate text-xs text-stone-600">{w.title}</p>
             </button>
@@ -175,7 +175,7 @@ function Community({ onPick }) {
           <button
             type="button"
             onClick={() => load(pages.length + 1)}
-            className="mx-auto mt-6 flex h-11 w-full max-w-xs items-center justify-center rounded-xl bg-surface px-6 text-sm font-semibold text-stone-800 ring-1 ring-stone-950/10 active:bg-stone-50 md:hover:bg-stone-50"
+            className="mx-auto mt-6 flex h-11 w-full max-w-xs items-center justify-center rounded-xl bg-surface px-6 text-sm font-semibold text-stone-800 ring-1 ring-stone-950/10 transition active:bg-stone-50 can-hover:bg-stone-50"
           >
             Load more
           </button>
@@ -350,7 +350,7 @@ export default function Wallpaper() {
       <div className="mb-6 flex h-11 items-center md:mb-0">
         <a
           href="#/send"
-          className="native-hide -ml-2 flex h-11 items-center gap-1.5 rounded-full pr-4 pl-2 text-lg font-semibold text-brand-600 transition active:bg-stone-200/70 md:hover:bg-stone-100"
+          className="native-hide -ml-2 flex h-11 items-center gap-1.5 rounded-full pr-4 pl-2 text-lg font-semibold text-brand-600 transition active:bg-stone-200/70 can-hover:bg-stone-100"
         >
           <ArrowLeft className="size-6" strokeWidth={2} /> Send
         </a>
@@ -375,7 +375,7 @@ export default function Wallpaper() {
       {!img ? (
         <button
           onClick={() => input.current?.click()}
-          className="mt-6 flex w-full max-w-xl flex-col items-center gap-2 rounded-xl border-2 border-dashed border-stone-300 bg-surface/60 px-4 py-10 text-center transition active:scale-[0.99]"
+          className="mt-6 flex w-full max-w-xl flex-col items-center gap-2 rounded-xl border-2 border-dashed border-stone-300 bg-surface/60 px-4 py-10 text-center transition active:scale-[0.99] can-hover:border-brand-300 can-hover:bg-brand-50/40"
         >
           <ImagePlus className="size-8 text-brand-500" strokeWidth={1.5} />
           <span className="font-semibold text-stone-900">Choose a photo</span>
@@ -445,14 +445,14 @@ export default function Wallpaper() {
                 <button
                   type="button"
                   onClick={() => set({ rotation: (s.rotation + 270) % 360 })}
-                  className="flex h-10 flex-1 items-center justify-center gap-2 rounded-xl bg-stone-100 text-sm font-medium text-stone-700 active:bg-stone-200"
+                  className="flex h-10 flex-1 items-center justify-center gap-2 rounded-xl bg-stone-100 text-sm font-medium text-stone-700 transition active:bg-stone-200 can-hover:bg-stone-200"
                 >
                   <RotateCcw className="size-4" /> Rotate left
                 </button>
                 <button
                   type="button"
                   onClick={() => set({ rotation: (s.rotation + 90) % 360 })}
-                  className="flex h-10 flex-1 items-center justify-center gap-2 rounded-xl bg-stone-100 text-sm font-medium text-stone-700 active:bg-stone-200"
+                  className="flex h-10 flex-1 items-center justify-center gap-2 rounded-xl bg-stone-100 text-sm font-medium text-stone-700 transition active:bg-stone-200 can-hover:bg-stone-200"
                 >
                   <RotateCw className="size-4" /> Rotate right
                 </button>
@@ -466,7 +466,7 @@ export default function Wallpaper() {
                   type="button"
                   onClick={() => setAuto(true)}
                   className={`flex h-9 items-center gap-1.5 rounded-full px-3 text-sm font-semibold transition ${
-                    auto ? 'bg-brand-50 text-brand-600 ring-1 ring-brand-200' : 'text-stone-600 active:bg-stone-100'
+                    auto ? 'bg-brand-50 text-brand-600 ring-1 ring-brand-200' : 'text-stone-600 active:bg-stone-100 can-hover:bg-stone-100'
                   }`}
                 >
                   <Wand2 className="size-4" /> Auto
@@ -484,7 +484,7 @@ export default function Wallpaper() {
                 <button
                   type="button"
                   onClick={() => tone({ blackPoint: 0, whitePoint: 255, gammaValue: 1, contrastValue: 0, invert: false })}
-                  className="text-sm font-medium text-stone-500 active:text-stone-800"
+                  className="text-sm font-medium text-stone-500 transition active:text-stone-800 can-hover:text-stone-800"
                 >
                   Reset
                 </button>
@@ -506,14 +506,14 @@ export default function Wallpaper() {
 
             <div className="grid grid-cols-2 gap-2">
               {isApp && (
-                <button onClick={send} disabled={status?.busy} className={`${actionBase} col-span-2 bg-brand-500 text-white shadow-sm`}>
+                <button onClick={send} disabled={status?.busy} className={`${actionBase} col-span-2 bg-brand-500 text-white shadow-sm can-hover:enabled:bg-brand-600`}>
                   {status?.busy ? <Loader2 className="size-5 animate-spin" /> : <SendIcon className="size-5" />} Send to reader
                 </button>
               )}
-              <button onClick={save} disabled={status?.busy} className={`${actionBase} bg-surface text-stone-800 ring-1 ring-stone-950/10`}>
+              <button onClick={save} disabled={status?.busy} className={`${actionBase} bg-surface text-stone-800 ring-1 ring-stone-950/10 can-hover:enabled:bg-stone-50`}>
                 <Download className="size-4" /> Save image
               </button>
-              <button onClick={() => setImg(null)} className={`${actionBase} bg-surface text-stone-800 ring-1 ring-stone-950/10`}>
+              <button onClick={() => setImg(null)} className={`${actionBase} bg-surface text-stone-800 ring-1 ring-stone-950/10 can-hover:bg-stone-50`}>
                 <ImagePlus className="size-4" /> Start over
               </button>
             </div>
