@@ -34,7 +34,7 @@ export default function MicroblogPosting({ session, onChange }) {
       <p className="text-xs text-stone-500">For new collections. Existing posts and later clippings stay on their original blog.</p>
       {data?.items?.length === 0 && <p>No blogs are available to this token.</p>}
       {(error || loadError) && <p role="alert" className="text-xs text-red-700">{error || loadError.message}</p>}
-      {loadError && <button type="button" onClick={reload} className="min-h-10 text-brand-600">Retry loading blogs</button>}
+      {loadError && <button type="button" onClick={reload} className="min-h-10 text-brand-600 can-hover:underline can-hover:underline-offset-2">Retry loading blogs</button>}
     </div>
   )
 }

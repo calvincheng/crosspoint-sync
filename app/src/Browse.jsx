@@ -440,7 +440,7 @@ function SectionRail({ cat, link }) {
         <a
           key={`${l.href}-${i}`}
           href={href(cat, 'f', l.href)}
-          className="flex h-20 w-40 shrink-0 snap-start items-end rounded-xl bg-surface p-3 ring-1 ring-stone-950/5 active:bg-stone-50"
+          className="flex h-20 w-40 shrink-0 snap-start items-end rounded-xl bg-surface p-3 ring-1 ring-stone-950/5 transition active:bg-stone-50 can-hover:bg-stone-50"
         >
           <span className="line-clamp-2 text-sm/5 font-semibold text-stone-800">{l.title}</span>
         </a>

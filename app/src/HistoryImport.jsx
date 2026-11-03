@@ -10,7 +10,7 @@ export default function HistoryImport({ session }) {
   const [finishes, setFinishes] = useState({})
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState(null)
-  const button = 'min-h-11 rounded-xl bg-stone-100 px-4 text-sm font-semibold text-stone-800 disabled:opacity-50'
+  const button = 'min-h-11 rounded-xl bg-stone-100 px-4 text-sm font-semibold text-stone-800 transition disabled:opacity-50 can-hover:enabled:bg-stone-200'
 
   async function review() {
     setBusy(true)

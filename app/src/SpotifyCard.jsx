@@ -65,11 +65,11 @@ function Calibrate({ session, book, data, onDone }) {
         </div>
       )}
       <div className="flex gap-2">
-        <button disabled={busy || !tracks} className="flex h-10 flex-1 items-center justify-center rounded-xl bg-brand-500 text-sm font-semibold text-white disabled:opacity-50">
+        <button disabled={busy || !tracks} className="flex h-10 flex-1 items-center justify-center rounded-xl bg-brand-500 text-sm font-semibold text-white transition disabled:opacity-50 can-hover:enabled:bg-brand-600">
           {busy ? <Loader2 className="size-4 animate-spin" /> : 'Save'}
         </button>
         {data.anchor && (
-          <button type="button" disabled={busy} onClick={() => run(() => api.clearSpotifyAnchor(session, book.document), 'Spotify back to automatic')} className="h-10 rounded-xl px-4 text-sm font-semibold text-stone-600 active:bg-stone-200">
+          <button type="button" disabled={busy} onClick={() => run(() => api.clearSpotifyAnchor(session, book.document), 'Spotify back to automatic')} className="h-10 rounded-xl px-4 text-sm font-semibold text-stone-600 transition active:bg-stone-200 can-hover:enabled:bg-stone-200">
             Reset
           </button>
         )}
@@ -142,7 +142,7 @@ export default function SpotifyCard({ session, book, onChange, revision = 0 }) {
         onClick={sync}
         disabled={syncing}
         aria-label="Sync with Spotify now"
-        className="absolute top-1.5 right-1.5 grid size-10 place-items-center rounded-full text-brand-600 active:bg-stone-100 disabled:opacity-60 md:hover:bg-stone-100"
+        className="absolute top-1.5 right-1.5 grid size-10 place-items-center rounded-full text-brand-600 transition active:bg-stone-100 disabled:opacity-60 can-hover:bg-stone-100"
       >
         <RefreshCw className={`size-5 ${syncing ? 'animate-spin' : ''}`} strokeWidth={1.75} />
       </button>
@@ -165,13 +165,13 @@ export default function SpotifyCard({ session, book, onChange, revision = 0 }) {
         type="button"
         disabled={busy}
         onClick={resume}
-        className="mt-3 flex h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-brand-500 px-3 text-sm font-semibold text-white transition active:scale-[0.98] disabled:opacity-50"
+        className="mt-3 flex h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-brand-500 px-3 text-sm font-semibold text-white transition active:scale-[0.98] disabled:opacity-50 can-hover:enabled:bg-brand-600"
       >
         {busy ? <Loader2 className="size-4 animate-spin" /> : <Play className="size-4 shrink-0" strokeWidth={2.25} />}
         <span className="truncate">Resume in Spotify at {at}</span>
       </button>
       {'reader_pct' in data && (
-        <button type="button" onClick={() => setCalibrating(!calibrating)} className="mt-2 w-full text-center text-xs font-medium text-stone-500">
+        <button type="button" onClick={() => setCalibrating(!calibrating)} className="mt-2 w-full text-center text-xs font-medium text-stone-500 transition can-hover:text-stone-800">
           {calibrating ? 'Cancel' : data.anchor ? 'Lined up with your reader · Adjust' : 'Not the right spot?'}
         </button>
       )}

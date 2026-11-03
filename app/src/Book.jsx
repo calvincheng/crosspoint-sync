@@ -133,7 +133,7 @@ export function hold(fn) {
 export function ClipMenu({ onDelete }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className={`absolute top-2 right-2 hidden md:block ${open ? '' : 'opacity-0 group-hover:opacity-100 focus-within:opacity-100'}`}>
+    <div className={`absolute top-2 right-2 hidden md:block ${open ? '' : 'opacity-0 group-can-hover:opacity-100 focus-within:opacity-100'}`}>
       <button
         type="button"
         aria-label="Clip actions"

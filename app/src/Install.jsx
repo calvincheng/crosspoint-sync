@@ -78,11 +78,11 @@ export default function InstallPrompt() {
           )}
         </div>
         {deferred && (
-          <button type="button" onClick={install} className="h-9 shrink-0 rounded-full bg-brand-500 px-4 text-sm font-semibold text-white active:scale-[0.98]">
+          <button type="button" onClick={install} className="h-9 shrink-0 rounded-full bg-brand-500 px-4 text-sm font-semibold text-white transition active:scale-[0.98] can-hover:bg-brand-600">
             Install
           </button>
         )}
-        <button type="button" onClick={close} aria-label="Not now" className="-mr-1 grid size-9 shrink-0 place-items-center rounded-full text-stone-400 active:bg-stone-100">
+        <button type="button" onClick={close} aria-label="Not now" className="-mr-1 grid size-9 shrink-0 place-items-center rounded-full text-stone-400 transition active:bg-stone-100 can-hover:bg-stone-100">
           <X className="size-4" />
         </button>
       </div>

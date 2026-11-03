@@ -44,7 +44,7 @@ export default function ShareSheet({ heading, meta, render, renderKey, onClose, 
       <div className="absolute inset-0 bg-stone-950/40" onClick={onClose} />
       <div className="relative max-h-[92dvh] w-full overflow-y-auto overscroll-contain rounded-t-[28px] bg-stone-50 p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] md:max-w-md md:rounded-[28px] md:p-6">
         <div className="mx-auto mb-4 h-1.5 w-10 rounded-full bg-stone-300 md:hidden" />
-        <button onClick={onClose} className="absolute top-3 right-3 grid size-10 place-items-center rounded-full text-stone-500 active:bg-stone-200" aria-label="Close">
+        <button onClick={onClose} className="absolute top-3 right-3 grid size-10 place-items-center rounded-full text-stone-500 transition active:bg-stone-200 can-hover:bg-stone-200/70" aria-label="Close">
           <X className="size-5" />
         </button>
         <h2 className="font-display text-xl font-semibold text-stone-900">{heading}</h2>
@@ -57,7 +57,7 @@ export default function ShareSheet({ heading, meta, render, renderKey, onClose, 
           <button
             disabled={status?.busy}
             onClick={() => act(() => shareNatively(card.blob, meta).then(() => null), () => null)}
-            className="mt-5 flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-brand-500 text-base font-semibold text-white shadow-sm active:scale-[0.98] disabled:opacity-60"
+            className="mt-5 flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-brand-500 text-base font-semibold text-white shadow-sm transition active:scale-[0.98] disabled:opacity-60 can-hover:enabled:bg-brand-600"
           >
             <ShareIcon className="size-5" /> Share
           </button>
@@ -67,14 +67,14 @@ export default function ShareSheet({ heading, meta, render, renderKey, onClose, 
           <button
             disabled={!card || status?.busy}
             onClick={() => act(() => copyImage(card.blob, meta).then((ok) => (ok ? 'copied' : 'nocopy')), (r) => (r === 'copied' ? 'Image copied to the clipboard.' : "This device can't copy images; use Save instead."))}
-            className="flex h-12 items-center justify-center gap-2 rounded-2xl bg-surface text-sm font-semibold text-stone-700 ring-1 ring-stone-950/10 active:bg-stone-100 disabled:opacity-50"
+            className="flex h-12 items-center justify-center gap-2 rounded-2xl bg-surface text-sm font-semibold text-stone-700 ring-1 ring-stone-950/10 transition active:bg-stone-100 disabled:opacity-50 can-hover:enabled:bg-stone-100"
           >
             <Copy className="size-4" /> Copy image
           </button>
           <button
             disabled={!card || status?.busy}
             onClick={() => act(() => saveImage(card.blob, meta).then((r) => (r.photos ? 'photos' : 'saved')), (n) => (n === 'photos' ? 'Saved to your photos.' : desktop ? 'Saved to your Downloads folder.' : 'Image saved.'))}
-            className="flex h-12 items-center justify-center gap-2 rounded-2xl bg-surface text-sm font-semibold text-stone-700 ring-1 ring-stone-950/10 active:bg-stone-100 disabled:opacity-50"
+            className="flex h-12 items-center justify-center gap-2 rounded-2xl bg-surface text-sm font-semibold text-stone-700 ring-1 ring-stone-950/10 transition active:bg-stone-100 disabled:opacity-50 can-hover:enabled:bg-stone-100"
           >
             <Download className="size-4" /> Save image
           </button>
@@ -94,7 +94,7 @@ export default function ShareSheet({ heading, meta, render, renderKey, onClose, 
                       (r) => (r === 'posted' ? `Image copied. Paste it into your ${p.name} post.` : `Opened ${p.name}. Save the image to attach it.`)
                     )
                   }
-                  className="h-11 rounded-xl bg-surface text-sm font-semibold text-stone-700 ring-1 ring-stone-950/10 active:bg-stone-100 disabled:opacity-50 md:hover:bg-stone-100"
+                  className="h-11 rounded-xl bg-surface text-sm font-semibold text-stone-700 ring-1 ring-stone-950/10 transition active:bg-stone-100 disabled:opacity-50 can-hover:enabled:bg-stone-100"
                 >
                   {p.name}
                 </button>

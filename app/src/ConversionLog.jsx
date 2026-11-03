@@ -11,7 +11,7 @@ export default function ConversionLog({ entries, children }) {
         aria-expanded={open}
         aria-controls={id}
         onClick={() => setOpen(!open)}
-        className="-my-1 py-1 font-medium underline-offset-2 hover:underline focus-visible:underline"
+        className="-my-1 py-1 font-medium underline-offset-2 can-hover:underline focus-visible:underline"
       >
         Details
       </button>
