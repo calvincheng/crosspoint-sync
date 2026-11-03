@@ -17,8 +17,8 @@ function greeting() {
 
 function ReadingCard({ session, book }) {
   return (
-    <a href={`#/book/${book.document}`} className="block">
-      <div className="relative mt-5 flex items-start gap-4 rounded-xl bg-surface p-4 ring-1 ring-stone-950/5 md:gap-8 md:p-6">
+    <a href={`#/book/${book.document}`} className="group block">
+      <div className="relative mt-5 flex items-start gap-4 rounded-xl bg-surface p-4 ring-1 ring-stone-950/5 transition can-hover:bg-stone-50 md:gap-8 md:p-6">
         <div aria-hidden="true" className="paper-grain pointer-events-none absolute inset-0 rounded-xl opacity-[0.04]" />
         <div aria-hidden="true" className="dot-field-sm pointer-events-none absolute inset-y-0 right-0 w-1/2 rounded-r-xl text-stone-200 [mask-image:linear-gradient(to_left,black,transparent)]" />
         <Cover session={session} book={book} className="w-28 sm:w-36 md:w-40" />
@@ -42,7 +42,7 @@ function ReadingCard({ session, book }) {
 function Row({ session, book }) {
   return (
     <a href={`#/book/${book.document}`} className="group flex items-center gap-3 py-3 active:bg-stone-100 md:flex-col md:items-stretch md:gap-2.5 md:py-0 md:active:bg-transparent">
-      <Cover session={session} book={book} small className="w-12 transition md:w-full md:group-hover:-translate-y-0.5 md:group-hover:shadow-md" />
+      <Cover session={session} book={book} small className="w-12 transition md:w-full group-can-hover:-translate-y-0.5 group-can-hover:shadow-md" />
       <div className="min-w-0 flex-1">
         <p className="truncate font-display md:text-sm text-[0.95rem] font-semibold text-stone-900">{book.title || book.filename || 'Untitled book'}</p>
         <p className="truncate text-xs text-stone-500">{book.author}</p>
@@ -108,7 +108,7 @@ export default function Library({ session, books, summary, activity }) {
       )}
 
       {dupe && (
-        <a href={`#/book/${dupe.document}`} className="mt-4 flex items-center gap-2 rounded-xl bg-brand-50 px-4 py-3 text-sm text-brand-800 active:bg-brand-100">
+        <a href={`#/book/${dupe.document}`} className="mt-4 flex items-center gap-2 rounded-xl bg-brand-50 px-4 py-3 text-sm text-brand-800 transition active:bg-brand-100 can-hover:bg-brand-100">
           <Merge className="size-4 shrink-0" />
           <span className="min-w-0 flex-1">
             <span className="font-semibold">{dupe.title}</span> appears more than once. Merge the copies to keep progress together.
@@ -124,7 +124,7 @@ export default function Library({ session, books, summary, activity }) {
             onClick={() => setTab(s.id)}
             aria-pressed={tab === s.id}
             className={`flex min-h-11 shrink-0 items-center gap-1.5 border-b-2 py-2 text-sm font-medium transition ${
-              tab === s.id ? 'border-brand-500 text-brand-700' : 'border-transparent text-stone-500'
+              tab === s.id ? 'border-brand-500 text-brand-700' : 'border-transparent text-stone-500 can-hover:text-stone-900'
             }`}
           >
             {s.label} <span className="ml-0.5 text-xs tabular-nums">{counts[s.id]}</span>
