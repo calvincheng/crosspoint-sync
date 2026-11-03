@@ -538,7 +538,7 @@ function Finished({ list, titles }) {
     <Card className="mt-4 divide-y divide-stone-100 px-4">
       <h2 className="py-3 font-display text-lg font-semibold text-stone-900">Finished</h2>
       {list.slice(0, shown).map((b) => (
-        <a key={b.document} href={`#/book/${b.document}`} className="flex items-baseline justify-between gap-3 py-2.5 transition can-hover:bg-stone-50">
+        <a key={b.document} href={`#/book/${b.document}`} className="-mx-2 flex items-baseline justify-between gap-3 rounded-lg px-2 py-2.5 transition can-hover:bg-stone-50">
           <span className="truncate text-sm font-medium text-stone-800">{titles.get(b.document) ?? b.document}</span>
           <span className="shrink-0 font-mono text-xs text-stone-500">
             {b.finished_at ? new Date(b.finished_at * 1000).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : 'Date unknown'}
@@ -773,7 +773,7 @@ function Timeline({ session, activity, books }) {
             {reading.length} reading
           </h2>
           {reading.map((b) => (
-            <a key={b.document} href={`#/book/${b.document}`} className="flex items-center gap-4 py-3 transition can-hover:bg-stone-50">
+            <a key={b.document} href={`#/book/${b.document}`} className="-mx-2 flex items-center gap-4 rounded-lg px-2 py-3 transition can-hover:bg-stone-50">
               <Cover session={session} book={b} tiny className="w-14" />
               <div className="min-w-0 flex-1">
                 <p className="truncate font-display text-base font-semibold text-stone-900">{b.title || b.filename}</p>
