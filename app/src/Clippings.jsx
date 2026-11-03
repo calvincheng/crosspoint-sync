@@ -34,7 +34,7 @@ function Clip({ session, clip, book, onShare, onDelete, showBook, onMicroblog, s
       <blockquote className="font-display text-lg/relaxed text-stone-800">{clip.text}</blockquote>
       {clip.note && <p className="mt-3 font-hand text-lg/6 text-brand-700">{clip.note}</p>}
       {showBook && (
-        <a href={`#/book/${book.document}`} className="mt-6 flex items-center gap-3 pr-5">
+        <a href={`#/book/${book.document}`} className="mt-6 flex items-center gap-3 pr-5 transition can-hover:opacity-80">
           <Cover session={session} book={book} small className="w-8" />
           <div className="min-w-0">
             <p className="text-sm font-medium text-stone-900">{book.title || book.filename}</p>
@@ -43,11 +43,11 @@ function Clip({ session, clip, book, onShare, onDelete, showBook, onMicroblog, s
         </a>
       )}
       <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
-        <button onClick={() => onShare(clip)} className="-ml-2 flex h-11 items-center gap-1.5 rounded-full px-2 text-sm font-medium text-brand-600 active:bg-stone-100">
+        <button onClick={() => onShare(clip)} className="-ml-2 flex h-11 items-center gap-1.5 rounded-full px-2 text-sm font-medium text-brand-600 transition active:bg-stone-100 can-hover:bg-stone-100">
           <ShareIcon className="size-4" /> Share
         </button>
         {onMicroblog && (
-          <button type="button" disabled={sending} onClick={() => onMicroblog(clip)} className="min-h-11 rounded-full px-2 text-sm font-medium text-brand-600 disabled:opacity-50">
+          <button type="button" disabled={sending} onClick={() => onMicroblog(clip)} className="min-h-11 rounded-full px-2 text-sm font-medium text-brand-600 transition disabled:opacity-50 can-hover:enabled:bg-stone-100">
             Add clipping to Micro.blog
           </button>
         )}
@@ -131,10 +131,10 @@ export default function Clippings({ session, books }) {
         {missingPosts.map((post) => {
           const book = byDoc.get(post.document)
           return <div key={post.document} className="mt-3 text-sm">
-            <a href={`#/book/${post.document}`} className="font-medium text-stone-900">{book.title || book.filename}</a>
+            <a href={`#/book/${post.document}`} className="font-medium text-stone-900 can-hover:underline can-hover:underline-offset-2">{book.title || book.filename}</a>
             {book.author && <p className="text-stone-500">{book.author}</p>}
             <p className="mt-1 text-stone-600">The Micro.blog post was deleted. Clippings are retained while publishing is paused.</p>
-            <button type="button" onClick={() => setRecreating(post)} className="min-h-11 font-medium text-brand-600">Recreate clippings post</button>
+            <button type="button" onClick={() => setRecreating(post)} className="min-h-11 font-medium text-brand-600 can-hover:underline can-hover:underline-offset-2">Recreate clippings post</button>
           </div>
         })}
       </section>}
@@ -173,15 +173,15 @@ export default function Clippings({ session, books }) {
               />
             </div>
             <details className="relative shrink-0">
-              <summary aria-label="Export clippings" title="Export clippings" className="grid size-11 cursor-pointer list-none place-items-center rounded-full text-stone-600 hover:bg-stone-100 active:bg-stone-200 [&::-webkit-details-marker]:hidden">
+              <summary aria-label="Export clippings" title="Export clippings" className="grid size-11 cursor-pointer list-none place-items-center rounded-full text-stone-600 transition can-hover:bg-stone-100 active:bg-stone-200 [&::-webkit-details-marker]:hidden">
                 <FileDown aria-hidden="true" className="size-5" strokeWidth={1.75} />
               </summary>
               <div className="absolute right-0 z-20 mt-1 w-48 rounded-xl bg-surface p-2 shadow-lg ring-1 ring-stone-950/10">
-                <button onClick={(e) => exportMd(false, e)} className="flex h-11 w-full items-center gap-2 rounded-lg px-3 text-sm font-medium text-stone-700 hover:bg-stone-100">
+                <button onClick={(e) => exportMd(false, e)} className="flex h-11 w-full items-center gap-2 rounded-lg px-3 text-sm font-medium text-stone-700 transition can-hover:bg-stone-100">
                   <Copy className="size-4" /> Copy Markdown
                 </button>
                 {isApp && (
-                  <button onClick={(e) => exportMd(true, e)} className="flex h-11 w-full items-center gap-2 rounded-lg px-3 text-sm font-medium text-stone-700 hover:bg-stone-100">
+                  <button onClick={(e) => exportMd(true, e)} className="flex h-11 w-full items-center gap-2 rounded-lg px-3 text-sm font-medium text-stone-700 transition can-hover:bg-stone-100">
                     <FileDown className="size-4" /> Save .md
                   </button>
                 )}
@@ -208,7 +208,7 @@ export default function Clippings({ session, books }) {
           )}
           {groups.map(({ book, clips }) => (
             <section key={book.document} className="mt-8">
-              <a href={`#/book/${book.document}`} className="flex items-center gap-3">
+              <a href={`#/book/${book.document}`} className="flex items-center gap-3 transition can-hover:opacity-80">
                 <Cover session={session} book={book} small className="w-10" />
                 <div className="min-w-0">
                   <h2 className="truncate font-display text-lg font-semibold text-stone-900">{book.title || book.filename}</h2>
@@ -270,7 +270,7 @@ function RecreateClippingsPost({ session, post, onClose, onDone }) {
         <span className="break-all">Current clippings blog: {currentBlog ? `${currentBlog.name} (${currentBlog.uid})` : blogs ? 'Choose an available blog in Settings first.' : 'Loading…'}</span>
       </label>}
       {currentBlog?.uid === post.destination && <span className="mt-3 block">The current clippings blog is also the previous blog.</span>}
-      {error && <span className="mt-3 block">Could not load the current clippings blog. <button type="button" onClick={reload} className="font-medium text-brand-600">Retry</button></span>}
+      {error && <span className="mt-3 block">Could not load the current clippings blog. <button type="button" onClick={reload} className="font-medium text-brand-600 can-hover:underline can-hover:underline-offset-2">Retry</button></span>}
     </ActionSheet>
   )
 }
